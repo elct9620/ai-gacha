@@ -20,6 +20,7 @@
     "vitest": "^0.29.2"
   },
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
     "replicate-js": "github:nicholascelestin/replicate-js"
   }
 }

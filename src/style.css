@@ -3,9 +3,18 @@
 @tailwind utilities;
 
 @layer components {
-  .btn {
-    @apply px-6 py-2;
+  .form-input {
+    @apply px-6 py-2 mx-2;
     @apply rounded;
+  }
+
+  .input {
+    @apply form-input;
+    @apply border border-gray-400;
+  }
+
+  .btn {
+    @apply form-input;
     @apply text-white;
     @apply transition;
   }
