@@ -22,5 +22,6 @@
   .btn-sky {
     @apply bg-sky-600;
     @apply hover:bg-sky-900;
+    @apply disabled:bg-sky-400;
   }
 }
