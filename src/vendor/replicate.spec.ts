@@ -36,8 +36,13 @@ describe('Replicate Adapter', () => {
     })
 
     expect(await model.generate().next()).toMatchObject({
-      done: true,
+      done: false,
       value: 'https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png'
+    })
+
+    expect(await model.generate().next()).toMatchObject({
+      done: true,
+      value: undefined
     })
   })
 })

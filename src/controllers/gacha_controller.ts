@@ -1,15 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 import Replicate from 'replicate-js'
 
-export default class extends Controller {
-  static targets = [
-    "token"
-  ]
+import Model from '../vendor/replicate'
 
-  private replicate?: Replicate
+export default class extends Controller {
+  static targets = ["token", "result"]
+
+  private model?: Model
 
   declare readonly hasTokenTarget: boolean
   declare readonly tokenTarget: HTMLInputElement
+  declare readonly hasResultTarget: boolean
+  declare readonly resultTarget: HTMLDivElement
 
   configure() {
     if(!this.hasTokenTarget) {
@@ -17,19 +19,35 @@ export default class extends Controller {
     }
 
     if(this.tokenTarget.value.length == 0) {
-      this.replicate = undefined
+      this.model = undefined
       return
     }
 
-    this.replicate = new Replicate({ token: this.tokenTarget.value })
-    this.replicate.baseUrl = `${window.location.origin}/ai`
+    const replicate = new Replicate({ token: this.tokenTarget.value })
+    replicate.baseUrl = `${window.location.origin}/ai`
+
+    this.model = new Model(replicate, import.meta.env.VITE_MODEL_VERSION)
   }
 
   async draw() {
-    if(!this.replicate) {
+    if(!this.model) {
       return
     }
 
-    await this.replicate.getModel('elct9620/pastel-mix')
+    let prediction
+    for await (prediction of this.model.generate()) {
+      console.log(prediction)
+      this.refreshResult('Processing...')
+    }
+
+    this.refreshResult(prediction || 'Failed!')
+  }
+
+  private refreshResult(content: string) {
+    if(!this.hasResultTarget) {
+      return
+    }
+
+    this.resultTarget.innerText = content
   }
 }

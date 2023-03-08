@@ -6,9 +6,12 @@
     <title>AI Gacha</title>
   </head>
   <body>
-    <div id="app" class="container mx-auto px-4 my-8" data-controller="gacha">
-      <input class="input" type="password" placeholder="Replicate API Token" data-gacha-target="token" data-action="gacha#configure" />
-      <button class="btn btn-sky" data-action="click->gacha#draw">Gacha</button>
+    <div id="app" class="container mx-auto px-4 my-8 space-y-4" data-controller="gacha">
+      <div>
+        <input class="input" type="password" placeholder="Replicate API Token" data-gacha-target="token" data-action="gacha#configure" />
+        <button class="btn btn-sky" data-action="click->gacha#draw">Gacha</button>
+      </div>
+      <div data-gacha-target="result"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -34,13 +34,15 @@ export default class Model implements ICardModel {
     const predict = await this.client.startPrediction(this.version, input)
     while(true) {
       const nextPredict = await this.client.getPrediction(predict.id)
-      await sleep(this.client.pollingInterval || 1000)
+      if(!nextPredict) { return }
 
       const res = nextPredict.output?.pop() || null
       if (Model.PendingState.includes(nextPredict.status)) {
         yield res
+        await sleep(this.client.pollingInterval || 1000)
       } else {
-        return res
+        yield res
+        return
       }
     }
   }
