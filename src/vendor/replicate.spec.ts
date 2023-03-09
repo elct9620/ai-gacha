@@ -15,7 +15,7 @@ describe('Replicate Adapter', () => {
         status: 'processing'
       },
       {
-        status: 'completed',
+        status: 'succeeded',
         output: [
           'https://replicate.delivery/pbxt/LNCGDvqk8zZlONoTaW694Wx5CqA5z3mLexlA38gV0JHDr0RIA/out-0.png',
           'https://replicate.delivery/pbxt/4HnR6cU4csaJKBwlis3VOWpErv4EbVeUUiAUxqx2uI4Fr0RIA/out-0.png',

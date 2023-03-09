@@ -29,7 +29,7 @@ describe('GachaController', async () => {
     })
 
     await page.route('http://localhost:3000/ai/predictions/ufawqhfynnddngldkgtslldrkq', async (route) => {
-      await route.fulfill({ json: { status: 'completed', output: ['https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png'] }})
+      await route.fulfill({ json: { status: 'succeeded', output: ['https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png'] }})
     })
 
     await page.goto('http://localhost:3000')
