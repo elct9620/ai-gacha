@@ -36,7 +36,6 @@ export default class extends Controller {
 
     let prediction
     for await (prediction of this.model.generate()) {
-      console.log(prediction)
       this.refreshResult('Processing...')
     }
 
