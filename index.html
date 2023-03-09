@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Gacha</title>
   </head>
-  <body>
-    <div id="app" class="container mx-auto px-4 my-8 space-y-4" data-controller="gacha">
-      <div class="font-cubic11">
-        <input class="input" type="password" placeholder="Replicate API Token" data-gacha-target="token" data-action="gacha#configure" data-testid="token" />
-        <button class="btn btn-sky" data-action="click->gacha#draw">製作</button>
+  <body class="bg-zinc-900">
+    <div id="app" class="flex flex-col items-center container mx-auto px-4 my-16 space-y-8" data-controller="gacha">
+      <div class="relative">
+        <div class="absolute top-0 inset-x-0 concern concern-top"></div>
+        <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
+        <canvas class="bg-zinc-900" data-gacha-target="card" width="448" height="640" data-testid="card"></canvas>
+        <div class="absolute top-1/2 left-0 right-0 text-center text-red-700 font-cubic11" data-gacha-target="status" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
-      <div>
-        <canvas data-gacha-target="card" width="448" height="640" data-testid="card"></canvas>
-        <div class="font-cubic11" data-gacha-target="status" data-testid="status"></div>
+      <div class="font-cubic11">
+        <input class="input" type="password" placeholder="Replicate API Token" data-gacha-target="token" data-action="gacha#configure" data-testid="token" /><button class="btn btn-primary border-l-0" data-action="click->gacha#draw">製作</button>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

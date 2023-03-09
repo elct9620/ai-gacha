@@ -10,24 +10,42 @@
 
 @layer components {
   .form-input {
-    @apply px-6 py-2 mx-2;
-    @apply rounded;
+    @apply bg-zinc-900;
+    @apply px-6 py-2;
+    @apply transition duration-300;
   }
 
   .input {
-    @apply form-input;
-    @apply border border-gray-400;
+    @apply form-input focus:outline-none;
+    @apply text-red-700 placeholder:text-red-700;
+    @apply border border-red-700 focus:border-red-600;
+    @apply ease-in-out-back duration-700;
   }
 
   .btn {
     @apply form-input;
-    @apply text-white;
-    @apply transition;
+    @apply text-red-700;
+    @apply ease-in-out-back;
   }
 
-  .btn-sky {
-    @apply bg-sky-600;
-    @apply hover:bg-sky-900;
-    @apply disabled:bg-sky-400;
+  .btn-primary {
+    @apply border border-red-700;
+    @apply hover:bg-red-700 hover:text-white;
+    @apply disabled:bg-red-800;
+  }
+
+  .concern {
+    @apply flex place-content-between;
+  }
+
+  .concern-top {
+    @apply before:block before:w-12 before:h-12 before:border-t before:border-l before:border-red-700;
+    @apply after:block after:w-12 after:h-12 after:border-t after:border-r after:border-red-700;
+  }
+
+  .concern-bottom {
+    @apply flex place-content-between;
+    @apply before:block before:w-12 before:h-12 before:border-b before:border-l before:border-red-700;
+    @apply after:block after:w-12 after:h-12 after:border-b after:border-r after:border-red-700;
   }
 }
