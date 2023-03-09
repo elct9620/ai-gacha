@@ -36,11 +36,11 @@ describe('GachaController', async () => {
     const token = page.getByTestId("token")
     await token.fill("TEST")
 
-    const button = page.getByRole('button', { name: /Gacha/ })
+    const button = page.getByRole('button', { name: /製作/ })
     await expect(button).toBeVisible()
     await button.click()
 
     const status = page.getByTestId('status')
-    await expect(status).toHaveText('Completed')
+    await expect(status).toHaveText('完成')
   }, 60_000)
 })

@@ -39,12 +39,12 @@ export default class extends Controller {
 
     let prediction
     for await (prediction of this.model.generate()) {
-      this.setStatus('Processing...')
+      this.setStatus('生成中⋯⋯')
     }
 
     const renderable = this.hasCardTarget && prediction
     if (!renderable) {
-      this.setStatus('Failed')
+      this.setStatus('失敗')
       return
     }
 
@@ -53,7 +53,7 @@ export default class extends Controller {
     const ctx = this.cardTarget.getContext('2d')
 
     ctx?.drawImage(image, 0, 0)
-    this.setStatus('Completed')
+    this.setStatus('完成')
   }
 
   private setStatus(content: string) {
