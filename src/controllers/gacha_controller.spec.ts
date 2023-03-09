@@ -40,7 +40,7 @@ describe('GachaController', async () => {
     await expect(button).toBeVisible()
     await button.click()
 
-    const result = page.getByTestId('result')
-    await expect(result).toHaveText('https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png')
+    const status = page.getByTestId('status')
+    await expect(status).toHaveText('Completed')
   }, 60_000)
 })

@@ -1,17 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
+import fetch from 'node-fetch'
 import Replicate from 'replicate-js'
 
 import Model from '../vendor/replicate'
 
 export default class extends Controller {
-  static targets = ["token", "result"]
+  static targets = ["token", "status", "card"]
 
   private model?: Model
 
   declare readonly hasTokenTarget: boolean
   declare readonly tokenTarget: HTMLInputElement
-  declare readonly hasResultTarget: boolean
-  declare readonly resultTarget: HTMLDivElement
+  declare readonly hasStatusTarget: boolean
+  declare readonly statusTarget: HTMLDivElement
+  declare readonly hasCardTarget: boolean
+  declare readonly cardTarget: HTMLCanvasElement
 
   configure() {
     if(!this.hasTokenTarget) {
@@ -36,17 +39,28 @@ export default class extends Controller {
 
     let prediction
     for await (prediction of this.model.generate()) {
-      this.refreshResult('Processing...')
+      this.setStatus('Processing...')
     }
 
-    this.refreshResult(prediction || 'Failed!')
-  }
-
-  private refreshResult(content: string) {
-    if(!this.hasResultTarget) {
+    const renderable = this.hasCardTarget && prediction
+    if (!renderable) {
+      this.setStatus('Failed')
       return
     }
 
-    this.resultTarget.innerText = content
+    const imageBlob =  await fetch(prediction).then(res => res.blob())
+    const image = await createImageBitmap(imageBlob)
+    const ctx = this.cardTarget.getContext('2d')
+
+    ctx?.drawImage(image, 0, 0)
+    this.setStatus('Completed')
+  }
+
+  private setStatus(content: string) {
+    if(!this.hasStatusTarget) {
+      return
+    }
+
+    this.statusTarget.innerText = content
   }
 }
