@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Cubic11";
+  src:  url('fonts/Cubic_11.woff2') format('woff2'),
+        url('fonts/Cubic_11.woff') format('woff');
+}
+
 @layer components {
   .form-input {
     @apply px-6 py-2 mx-2;
