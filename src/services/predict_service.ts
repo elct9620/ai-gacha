@@ -33,10 +33,10 @@ export class PredictService {
 
       const res = nextPredict.output?.pop()
       if (PredictService.PendingState.includes(nextPredict.status)) {
-        yield new PredictState(res)
+        yield new PredictState(false, res)
         await sleep(this.client.pollingInterval || 1000)
       } else {
-        yield new PredictState(res)
+        yield new PredictState(true, res)
         return
       }
     }

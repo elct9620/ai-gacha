@@ -35,12 +35,12 @@ describe('Predict Service', () => {
     const state = service.predict(card)
     expect(await state.next()).toMatchObject({
       done: false,
-      value: new PredictState()
+      value: new PredictState(false)
     })
 
     expect(await state.next()).toMatchObject({
       done: false,
-      value: new PredictState('https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png')
+      value: new PredictState(true, 'https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png')
     })
 
     expect(await state.next()).toMatchObject({
@@ -72,12 +72,12 @@ describe('Predict Service', () => {
 
       expect(await state.next()).toMatchObject({
         done: false,
-        value: new PredictState()
+        value: new PredictState(false)
       })
 
       expect(await state.next()).toMatchObject({
         done: false,
-        value: new PredictState()
+        value: new PredictState(true)
       })
 
       expect(await state.next()).toMatchObject({

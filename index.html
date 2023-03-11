@@ -12,8 +12,8 @@
           <div class="absolute top-0 inset-x-0 concern concern-top"></div>
           <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
         </div>
-        <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:success->card#draw gacha:download->card#download" width="448" height="640" data-testid="card"></canvas>
-        <div class="absolute top-1/2 left-0 right-0 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
+        <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:processing->card#draw gacha:success->card#draw gacha:download->card#download" width="448" height="640" data-testid="card"></canvas>
+        <div class="absolute top-1/2 left-0 right-0 px-5 py-4 bg-zinc-900 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
       <aside>
         <h1 class="mb-2 text-xl">概率</h1>

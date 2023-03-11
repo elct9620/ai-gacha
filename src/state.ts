@@ -68,7 +68,7 @@ export class State {
 }
 
 export function resetState() {
-  store = {}
+  store = { seed: 0 }
 }
 
 export function getState() {

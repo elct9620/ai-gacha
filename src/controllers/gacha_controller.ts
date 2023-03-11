@@ -41,8 +41,13 @@ export default class extends Controller {
     const state = getState()
     state.useSeed(Math.floor(10**16 * Math.random()))
 
-    let prediction: PredictState = new PredictState()
+    let prediction: PredictState = new PredictState(false)
     for await (prediction of this.predictor.predict(state.currentCard)) {
+      if(prediction.hasOutput) {
+        this.subscriberTargets.forEach(target => {
+          this.dispatch("processing", { target, detail: { url: prediction.outputURL } })
+        })
+      }
     }
     this.enableButton()
 
