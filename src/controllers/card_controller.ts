@@ -32,7 +32,6 @@ export default class extends Controller<HTMLCanvasElement> {
   }
 
   download() {
-    console.log('download.png')
     const tempElement = document.createElement('a')
     tempElement.href = this.element.toDataURL()
     tempElement.download = "card.png"
