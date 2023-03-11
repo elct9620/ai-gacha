@@ -37,8 +37,8 @@
         <hr class="my-8 border-t border-red-900" />
         <section class="flex">
           <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" />
-          <button class="btn btn-primary border-l-0" data-action="click->gacha#draw">製作</button>
-          <button class="btn btn-primary border-l-0" data-action="click->gacha#download">下載</button>
+          <button class="btn btn-primary border-l-0" data-gacha-target="drawButton" data-action="click->gacha#draw" disabled>製作</button>
+          <button class="btn btn-primary border-l-0" data-gacha-target="downloadButton" data-action="click->gacha#download" disabled>下載</button>
         </section>
       </aside>
     </main>
