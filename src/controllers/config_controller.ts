@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 import {
+  Card,
   Race,
   HairLength,
   HairColor,
@@ -8,7 +9,7 @@ import {
 } from '../entities'
 import { getState, State } from '../state'
 
-type AttributeNames = "race" | "hairLength" | "hairColor" | "eyeColor" | "hires"
+type AttributeNames = "race" | "hairLength" | "hairColor" | "eyeColor" | "isHires"
 type AttributeItem = Record<number, string>
 const AttributeOptions: Record<AttributeNames, AttributeItem> = {
   "race": {
@@ -40,7 +41,7 @@ const AttributeOptions: Record<AttributeNames, AttributeItem> = {
     [EyeColor.Green]: '綠',
     [EyeColor.Red]: '紅'
   },
-  "hires": {
+  "isHires": {
     0: '否',
     1: '是',
   },
@@ -52,11 +53,12 @@ const AttributeSetters: Record<AttributeNames, Setter> = {
   "hairLength": (state: State, value: number) => { state.setHairLength(value as HairLength) },
   "hairColor": (state: State, value: number) => { state.setHairColor(value as HairColor) },
   "eyeColor": (state: State, value: number) => { state.setEyeColor(value as EyeColor) },
-  "hires": (state: State, value: number) => { state.setHires(value == 1) },
+  "isHires": (state: State, value: number) => { state.setHires(value == 1) },
 }
 
-const createInput = (type: string, id: string) => {
+const createInput = (type: string, id: string, card: Pick<Card, AttributeNames>) => {
   const input = document.createElement('input') as HTMLInputElement
+  const currentValue = card[type as AttributeNames]
 
   input.id = `${type}-${id}`
   input.type = 'radio'
@@ -64,6 +66,7 @@ const createInput = (type: string, id: string) => {
   input.className = 'hidden peer'
   input.name = `${type}`
   input.value = id
+  input.checked = currentValue == Number(id)
   return input
 }
 
@@ -103,12 +106,13 @@ export default class extends Controller {
     }
 
     while(target.lastChild) { target.removeChild(target.lastChild) }
-    const fragment = document.createDocumentFragment()
 
+    const currentCard = getState().currentCard
+    const fragment = document.createDocumentFragment()
     for(let id in options) {
       const name = options[id]
       const option = document.createElement('span') as HTMLSpanElement
-      const input = createInput(attrType, id)
+      const input = createInput(attrType, id, currentCard)
       const label = createLabel(attrType, id, name)
 
       option.appendChild(input)
