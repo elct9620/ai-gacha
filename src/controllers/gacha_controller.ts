@@ -48,6 +48,7 @@ export default class extends Controller {
       this.subscriberTargets.forEach(target => {
         this.dispatch("failed", { target })
       })
+      this.downloadButtonTarget.disabled = true
       return
     }
 
