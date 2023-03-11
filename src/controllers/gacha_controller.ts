@@ -3,7 +3,7 @@ import Replicate from 'replicate-js'
 
 import { getState } from '../state'
 import { PredictService } from '../services'
-import { PredictState } from '../entities'
+import { Card, PredictState } from '../entities'
 
 export default class extends Controller {
   static targets = ["subscriber"]
@@ -34,8 +34,9 @@ export default class extends Controller {
       this.dispatch("start", { target })
     })
 
+    const card = new Card()
     let state: PredictState = new PredictState()
-    for await (state of this.predictor.predict()) {
+    for await (state of this.predictor.predict(card)) {
     }
 
     if (!state.hasOutput) {

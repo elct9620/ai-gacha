@@ -1,11 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import Replicate from 'replicate-js'
 import { PredictService } from './predict_service'
-import { PredictState } from '../entities'
+import { Card, PredictState } from '../entities'
 
 describe('Predict Service', () => {
   afterEach(() => { vi.restoreAllMocks() })
 
+  const card = new Card()
   const replicate = new Replicate({ token: 'TEST' })
   replicate.pollingInterval = 1
 
@@ -31,7 +32,7 @@ describe('Predict Service', () => {
     })
 
     const service = new PredictService(replicate, 'ba8b1f407cd6418fa589ca73e5c623c081600ecff19f7fc3249fa536d762bb29')
-    const state = service.predict()
+    const state = service.predict(card)
     expect(await state.next()).toMatchObject({
       done: false,
       value: new PredictState()
@@ -67,7 +68,7 @@ describe('Predict Service', () => {
       })
 
       const service = new PredictService(replicate, 'ba8b1f407cd6418fa589ca73e5c623c081600ecff19f7fc3249fa536d762bb29')
-      const state = service.predict()
+      const state = service.predict(card)
 
       expect(await state.next()).toMatchObject({
         done: false,
