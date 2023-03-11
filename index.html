@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Gacha</title>
   </head>
-  <body class="bg-zinc-900">
+  <body class="bg-zinc-900 font-cubic11">
     <div id="app" class="flex flex-col items-center container mx-auto px-4 my-16 space-y-8" data-controller="gacha config" data-action="config:tokenChanged->gacha#setupClient">
       <div class="relative">
         <div class="absolute inset-x-0 inset-y-0 animate-expand">
@@ -13,9 +13,9 @@
           <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
         </div>
         <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:success->card#draw" width="448" height="640" data-testid="card"></canvas>
-        <div class="absolute top-1/2 left-0 right-0 text-center text-red-700 font-cubic11" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
+        <div class="absolute top-1/2 left-0 right-0 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
-      <div class="font-cubic11">
+      <div>
         <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" /><button class="btn btn-primary border-l-0" data-action="click->gacha#draw">製作</button>
       </div>
     </div>
