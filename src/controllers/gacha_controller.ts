@@ -3,11 +3,13 @@ import fetch from 'node-fetch'
 import Replicate from 'replicate-js'
 
 import Model from '../vendor/replicate'
+import RenderService from '../domains/render_service'
 
 export default class extends Controller {
   static targets = ["token", "status", "card"]
 
   private model?: Model
+  private renderService?: RenderService
 
   declare readonly hasTokenTarget: boolean
   declare readonly tokenTarget: HTMLInputElement
@@ -15,6 +17,15 @@ export default class extends Controller {
   declare readonly statusTarget: HTMLDivElement
   declare readonly hasCardTarget: boolean
   declare readonly cardTarget: HTMLCanvasElement
+
+  connect() {
+    if(this.hasCardTarget) {
+      const ctx = this.cardTarget.getContext('2d')
+      if(ctx) {
+        this.renderService = new RenderService(ctx, this.cardTarget.width, this.cardTarget.height)
+      }
+    }
+  }
 
   configure() {
     if(!this.hasTokenTarget) {
@@ -37,8 +48,7 @@ export default class extends Controller {
       return
     }
 
-    const ctx = this.cardTarget.getContext('2d')
-    ctx?.clearRect(0, 0, this.cardTarget.width, this.cardTarget.height)
+    this.renderService?.clear()
 
     let prediction
     for await (prediction of this.model.generate()) {
@@ -54,7 +64,7 @@ export default class extends Controller {
     const imageBlob =  await fetch(prediction).then(res => res.blob())
     const image = await createImageBitmap(imageBlob)
 
-    ctx?.drawImage(image, 0, 0)
+    this.renderService?.draw(image)
     this.setStatus('完成')
     this.hideStatus()
   }
