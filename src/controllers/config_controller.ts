@@ -73,7 +73,7 @@ const createInput = (type: string, id: string, card: Pick<Card, AttributeNames>)
 const createLabel = (type: string, id: string, name: string) => {
   const label = document.createElement('label') as HTMLLabelElement
 
-  label.className = 'input selectable'
+  label.className = 'input selectable m-2'
   label.htmlFor = `${type}-${id}`
   label.innerText = name
   return label

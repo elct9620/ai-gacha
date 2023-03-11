@@ -12,7 +12,7 @@
           <div class="absolute top-0 inset-x-0 concern concern-top"></div>
           <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
         </div>
-        <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:processing->card#draw gacha:success->card#draw gacha:download->card#download" width="448" height="640" data-testid="card"></canvas>
+        <canvas class="bg-zinc-900 max-w-full" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:processing->card#draw gacha:success->card#draw gacha:download->card#download" width="448" height="640" data-testid="card"></canvas>
         <div class="absolute top-1/2 left-0 right-0 px-5 py-4 bg-zinc-900 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
       <aside>
@@ -20,26 +20,26 @@
         <p class="mb-4 text-red-800">產生的畫面會盡可能接近以下要素</p>
         <div class="space-y-6">
           <section class="space-y-2">
-            <h1>種族</h1><div class="space-x-2" data-config-target="attribute" data-config-type="race"></div>
+            <h1>種族</h1><div data-config-target="attribute" data-config-type="race"></div>
           </section>
           <section class="space-y-2">
             <h1>髮型</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairLength"></div>
           </section>
           <section class="space-y-2">
-            <h1>髮色</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairColor"></div>
+            <h1>髮色</h1><div data-config-target="attribute" data-config-type="hairColor"></div>
           </section>
           <section class="space-y-2">
-            <h1>瞳色</h1><div class="space-x-2" data-config-target="attribute" data-config-type="eyeColor"></div>
+            <h1>瞳色</h1><div data-config-target="attribute" data-config-type="eyeColor"></div>
           </section>
           <section class="space-y-2">
-            <h1>細化</h1><div class="space-x-2" data-config-target="attribute" data-config-type="isHires"></div>
+            <h1>細化</h1><div data-config-target="attribute" data-config-type="isHires"></div>
           </section>
         </div>
         <hr class="my-8 border-t border-red-900" />
-        <section class="flex">
+        <section class="flex flex-col md:flex-row max-w-full">
           <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" />
-          <button class="btn btn-primary border-l-0" data-gacha-target="drawButton" data-action="click->gacha#draw" disabled>製作</button>
-          <button class="btn btn-primary border-l-0" data-gacha-target="downloadButton" data-action="click->gacha#download" disabled>下載</button>
+          <button class="btn btn-primary border-t-0 md:border-t md:border-l-0" data-gacha-target="drawButton" data-action="click->gacha#draw" disabled>製作</button>
+          <button class="btn btn-primary border-t-0 md:border-t md:border-l-0" data-gacha-target="downloadButton" data-action="click->gacha#download" disabled>下載</button>
         </section>
         <p class="mt-2 text-red-800">Pastel Mix 模型預設非商業使用，請使用 <a href="https://replicate.com/account" target="_blank" class="text-red-500 cursor-pointer">Replicate</a> 的 API Token 來運行，會被收取少量的運算費用。</p>
       </aside>
