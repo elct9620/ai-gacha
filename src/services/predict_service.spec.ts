@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import Replicate from 'replicate-js'
-import PredictService from './predict_service'
+import { PredictService } from './predict_service'
 
 describe('Predict Service', () => {
   afterEach(() => { vi.restoreAllMocks() })

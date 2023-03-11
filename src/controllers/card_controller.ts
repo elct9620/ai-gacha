@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import fetch from 'node-fetch'
 
 import { EventDetail, PredictionPayload } from '../events'
-import RenderService from '../domains/render_service'
+import { RenderService } from '../services'
 
 export default class extends Controller<HTMLCanvasElement> {
   private renderer?: RenderService

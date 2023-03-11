@@ -7,7 +7,7 @@ const DEFAULT_HEIGHT = 640
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export default class PredictService {
+export class PredictService {
   static readonly PendingState = ["starting", "processing"]
 
   public readonly version: string
