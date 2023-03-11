@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import Replicate from 'replicate-js'
-import Model from './replicate'
+import PredictService from './predict_service'
 
-describe('Replicate Adapter', () => {
+describe('Predict Service', () => {
   afterEach(() => { vi.restoreAllMocks() })
 
   const replicate = new Replicate({ token: 'TEST' })
@@ -29,18 +29,19 @@ describe('Replicate Adapter', () => {
       return Promise.resolve(responses[counter++])
     })
 
-    const model = new Model(replicate, 'ba8b1f407cd6418fa589ca73e5c623c081600ecff19f7fc3249fa536d762bb29')
-    expect(await model.generate().next()).toMatchObject({
+    const service = new PredictService(replicate, 'ba8b1f407cd6418fa589ca73e5c623c081600ecff19f7fc3249fa536d762bb29')
+    const state = service.predict()
+    expect(await state.next()).toMatchObject({
       done: false,
       value: null
     })
 
-    expect(await model.generate().next()).toMatchObject({
+    expect(await state.next()).toMatchObject({
       done: false,
       value: 'https://replicate.delivery/pbxt/5cvqlrCdze3YPKB8uJVwb4fTX1DhHE43hsQnft5MUBNrsSHhA/out-0.png'
     })
 
-    expect(await model.generate().next()).toMatchObject({
+    expect(await state.next()).toMatchObject({
       done: true,
       value: undefined
     })

@@ -2,14 +2,14 @@ import { Controller } from "@hotwired/stimulus"
 import fetch from 'node-fetch'
 import Replicate from 'replicate-js'
 
-import Model from '../vendor/replicate'
+import PredictService from '../domains/predict_service'
 import RenderService from '../domains/render_service'
 
 export default class extends Controller {
   static targets = ["token", "status", "card"]
 
-  private model?: Model
-  private renderService?: RenderService
+  private predictor?: PredictService
+  private renderer?: RenderService
 
   declare readonly hasTokenTarget: boolean
   declare readonly tokenTarget: HTMLInputElement
@@ -22,7 +22,7 @@ export default class extends Controller {
     if(this.hasCardTarget) {
       const ctx = this.cardTarget.getContext('2d')
       if(ctx) {
-        this.renderService = new RenderService(ctx, this.cardTarget.width, this.cardTarget.height)
+        this.renderer = new RenderService(ctx, this.cardTarget.width, this.cardTarget.height)
       }
     }
   }
@@ -33,25 +33,25 @@ export default class extends Controller {
     }
 
     if(this.tokenTarget.value.length == 0) {
-      this.model = undefined
+      this.predictor = undefined
       return
     }
 
     const replicate = new Replicate({ token: this.tokenTarget.value })
     replicate.baseUrl = `${window.location.origin}/ai`
 
-    this.model = new Model(replicate, import.meta.env.VITE_MODEL_VERSION)
+    this.predictor = new PredictService(replicate, import.meta.env.VITE_MODEL_VERSION)
   }
 
   async draw() {
-    if(!this.model) {
+    if(!this.predictor) {
       return
     }
 
-    this.renderService?.clear()
+    this.renderer?.clear()
 
     let prediction
-    for await (prediction of this.model.generate()) {
+    for await (prediction of this.predictor.predict()) {
       this.setStatus('生成中⋯⋯')
     }
 
@@ -64,7 +64,7 @@ export default class extends Controller {
     const imageBlob =  await fetch(prediction).then(res => res.blob())
     const image = await createImageBitmap(imageBlob)
 
-    this.renderService?.draw(image)
+    this.renderer?.draw(image)
     this.setStatus('完成')
     this.hideStatus()
   }
