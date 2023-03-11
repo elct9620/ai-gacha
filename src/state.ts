@@ -1,5 +1,11 @@
+import {
+  Card,
+  Race,
+} from './entities'
+
 type Schema = {
   token?: string
+  race?: Race
 }
 
 let store: Schema = {}
@@ -13,8 +19,18 @@ class State {
     return store.token
   }
 
+  get currentCard(): Card {
+    return new Card({
+      race: store.race
+    })
+  }
+
   updateToken(token: string) {
     store.token = token
+  }
+
+  setRace(race: Race) {
+    store.race = race
   }
 }
 
