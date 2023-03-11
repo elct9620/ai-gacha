@@ -25,7 +25,7 @@ export default class extends Controller {
     replicate.baseUrl = `${window.location.origin}/ai`
 
     this.predictor = new PredictService(replicate, import.meta.env.VITE_MODEL_VERSION)
-    this.drawButtonTarget.disabled = false
+    this.enableDraw()
   }
 
   async draw() {
@@ -48,7 +48,7 @@ export default class extends Controller {
       this.subscriberTargets.forEach(target => {
         this.dispatch("failed", { target })
       })
-      this.downloadButtonTarget.disabled = true
+      this.disableDownload()
       return
     }
 
@@ -63,13 +63,29 @@ export default class extends Controller {
     })
   }
 
-  enableButton() {
+  enableDraw() {
     this.drawButtonTarget.disabled = false
+  }
+
+  enableDownload() {
     this.downloadButtonTarget.disabled = false
   }
 
-  disableButton() {
+  enableButton() {
+    this.enableDraw()
+    this.enableDownload()
+  }
+
+  disableDraw() {
     this.drawButtonTarget.disabled = true
+  }
+
+  disableDownload() {
     this.downloadButtonTarget.disabled = true
+  }
+
+  disableButton() {
+    this.disableDraw()
+    this.disableDownload()
   }
 }
