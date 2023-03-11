@@ -1,5 +1,7 @@
 import Replicate from 'replicate-js'
 
+import { PredictState } from '../entities'
+
 const DEFAULT_PROMPT = 'mksks style, masterpiece, best quality, ultra-detailed, illustration, close-up, straight on, face focus, 1girl, white hair, golden eyes, long hair, halo, angel wings, serene expression, looking at viewer'
 const DEFAULT_NEGATIVE_PROMPT = 'lowres, ((bad anatomy)), ((bad hands)), text, missing finger, extra digits, fewer digits, blurry, ((mutated hands and fingers)), (poorly drawn face), ((mutation)), ((deformed face)), (ugly), ((bad proportions)), ((extra limbs)), extra face, (double head), (extra head), ((extra feet)), monster, logo, cropped, worst quality, low quality, normal quality, jpeg, humpbacked, long body, long neck, ((jpeg artifacts))'
 const DEFAULT_WIDTH = 448
@@ -32,12 +34,12 @@ export class PredictService {
       const nextPredict = await this.client.getPrediction(predict.id)
       if(!nextPredict) { return }
 
-      const res = nextPredict.output?.pop() || null
+      const res = nextPredict.output?.pop()
       if (PredictService.PendingState.includes(nextPredict.status)) {
-        yield res
+        yield new PredictState(res)
         await sleep(this.client.pollingInterval || 1000)
       } else {
-        yield res
+        yield new PredictState(res)
         return
       }
     }

@@ -3,6 +3,7 @@ import Replicate from 'replicate-js'
 
 import { getState } from '../state'
 import { PredictService } from '../services'
+import { PredictState } from '../entities'
 
 export default class extends Controller {
   static targets = ["subscriber"]
@@ -33,11 +34,11 @@ export default class extends Controller {
       this.dispatch("start", { target })
     })
 
-    let prediction: string | null = null
-    for await (prediction of this.predictor.predict()) {
+    let state: PredictState = new PredictState()
+    for await (state of this.predictor.predict()) {
     }
 
-    if (!prediction) {
+    if (!state.hasOutput) {
       this.subscriberTargets.forEach(target => {
         this.dispatch("failed", { target })
       })
@@ -45,7 +46,7 @@ export default class extends Controller {
     }
 
     this.subscriberTargets.forEach(target => {
-      this.dispatch("success", { target, detail: { url: prediction }})
+      this.dispatch("success", { target, detail: { url: state.outputURL }})
     })
   }
 }
