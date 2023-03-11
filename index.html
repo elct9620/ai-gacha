@@ -12,7 +12,7 @@
           <div class="absolute top-0 inset-x-0 concern concern-top"></div>
           <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
         </div>
-        <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:success->card#draw" width="448" height="640" data-testid="card"></canvas>
+        <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:success->card#draw gacha:download->card#download" width="448" height="640" data-testid="card"></canvas>
         <div class="absolute top-1/2 left-0 right-0 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
       <aside>
@@ -38,6 +38,7 @@
         <section class="flex">
           <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" />
           <button class="btn btn-primary border-l-0" data-action="click->gacha#draw">製作</button>
+          <button class="btn btn-primary border-l-0" data-action="click->gacha#download">下載</button>
         </section>
       </aside>
     </main>

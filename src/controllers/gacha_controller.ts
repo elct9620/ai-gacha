@@ -50,4 +50,10 @@ export default class extends Controller {
       this.dispatch("success", { target, detail: { url: prediction.outputURL }})
     })
   }
+
+  download() {
+    this.subscriberTargets.forEach(target => {
+      this.dispatch("download", { target })
+    })
+  }
 }

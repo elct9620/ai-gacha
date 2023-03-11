@@ -30,4 +30,13 @@ export default class extends Controller<HTMLCanvasElement> {
 
     this.renderer.draw(image)
   }
+
+  download() {
+    console.log('download.png')
+    const tempElement = document.createElement('a')
+    tempElement.href = this.element.toDataURL()
+    tempElement.download = "card.png"
+    tempElement.click()
+    tempElement.remove()
+  }
 }
