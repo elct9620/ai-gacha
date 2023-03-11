@@ -24,7 +24,9 @@
 
   .selectable {
     @apply cursor-pointer;
-    @apply peer-checked:bg-red-700 peer-checked:text-white;
+    @apply peer-checked:border-red-900 peer-checked:bg-red-900 peer-checked:text-red-200;
+    @apply border border-red-700;
+    @apply hover:bg-red-700 hover:text-red-100;
   }
 
   .btn {
@@ -36,8 +38,8 @@
 
   .btn-primary {
     @apply border border-red-700;
-    @apply hover:bg-red-700 hover:text-white;
-    @apply disabled:text-red-900 disabled:cursor-not-allowed;
+    @apply hover:bg-red-700 hover:text-red-100;
+    @apply disabled:border-red-900 disabled:text-red-900 disabled:cursor-not-allowed;
   }
 
   .concern {
