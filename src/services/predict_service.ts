@@ -22,6 +22,7 @@ export class PredictService {
       width: Card.WIDTH,
       height: Card.HEIGHT,
       hires: card.isHires,
+      seed: card.seed,
     };
 
 

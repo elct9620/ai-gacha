@@ -12,10 +12,11 @@ type Schema = {
   hairLength?: HairLength,
   hairColor?: HairColor,
   eyeColor?: EyeColor
-  hires?: boolean
+  hires?: boolean,
+  seed: number
 }
 
-let store: Schema = {}
+let store: Schema = { seed: 0 }
 
 export class State {
   get hasToken(): boolean {
@@ -33,11 +34,16 @@ export class State {
       hairColor: store.hairColor,
       eyeColor: store.eyeColor,
       hires: store.hires,
+      seed: store.seed,
     })
   }
 
   updateToken(token: string) {
     store.token = token
+  }
+
+  useSeed(seed: number) {
+    store.seed = seed
   }
 
   setRace(race: Race) {

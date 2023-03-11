@@ -24,7 +24,8 @@ export type CardAttribute = {
   hairColor?: HairColor
   eyeColor?: EyeColor
   race?: Race,
-  hires?: boolean
+  hires?: boolean,
+  seed: number
 }
 
 export class Card {
@@ -36,6 +37,7 @@ export class Card {
   public hairColor: HairColor
   public eyeColor: EyeColor
   public race: Race
+  public seed: number
 
   private _hires: boolean
 
@@ -45,6 +47,7 @@ export class Card {
     this.hairColor = attributes?.hairColor || HairColor.White
     this.eyeColor = attributes?.eyeColor || EyeColor.Golden
     this.race = attributes?.race || Race.Angel
+    this.seed = attributes?.seed || 0
     this._hires = attributes?.hires || false
   }
 

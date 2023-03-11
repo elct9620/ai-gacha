@@ -39,6 +39,8 @@ export default class extends Controller {
     })
 
     const state = getState()
+    state.useSeed(Math.floor(10**16 * Math.random()))
+
     let prediction: PredictState = new PredictState()
     for await (prediction of this.predictor.predict(state.currentCard)) {
     }

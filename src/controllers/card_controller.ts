@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 
 import { EventDetail, PredictionPayload } from '../events'
 import { RenderService } from '../services'
+import { getState } from '../state'
 
 export default class extends Controller<HTMLCanvasElement> {
   private renderer?: RenderService
@@ -32,9 +33,10 @@ export default class extends Controller<HTMLCanvasElement> {
   }
 
   download() {
+    const state = getState()
     const tempElement = document.createElement('a')
     tempElement.href = this.element.toDataURL()
-    tempElement.download = "card.png"
+    tempElement.download = `${state.currentCard.seed}.png`
     tempElement.click()
     tempElement.remove()
   }
