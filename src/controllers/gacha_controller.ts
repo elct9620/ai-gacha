@@ -8,12 +8,10 @@ type TokenChangedPayload = {
 }
 
 export default class extends Controller {
-  static targets = ["status", "subscriber"]
+  static targets = ["subscriber"]
 
   private predictor?: PredictService
 
-  declare readonly hasStatusTarget: boolean
-  declare readonly statusTarget: HTMLDivElement
   declare readonly hasSubscriberTarget: boolean
   declare readonly subscriberTargets: Element[]
 
@@ -35,37 +33,17 @@ export default class extends Controller {
 
     let prediction: string | null = null
     for await (prediction of this.predictor.predict()) {
-      this.setStatus('生成中⋯⋯')
     }
 
     if (!prediction) {
-      this.setStatus('失敗')
+      this.subscriberTargets.forEach(target => {
+        this.dispatch("failed", { target })
+      })
       return
     }
 
     this.subscriberTargets.forEach(target => {
       this.dispatch("success", { target, detail: { url: prediction }})
     })
-
-    this.setStatus('完成')
-    this.hideStatus()
-  }
-
-  private setStatus(content: string) {
-    if(!this.hasStatusTarget) {
-      return
-    }
-
-    this.statusTarget.classList.remove('hidden')
-    this.statusTarget.classList.add('animate-pulse')
-    this.statusTarget.innerText = content
-  }
-
-  private hideStatus() {
-    if(!this.hasStatusTarget) {
-      return
-    }
-
-    this.statusTarget.classList.add('hidden')
   }
 }
