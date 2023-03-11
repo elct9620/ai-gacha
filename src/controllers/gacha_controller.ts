@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import Replicate from 'replicate-js'
 
-import { EventDetail, TokenChangedPayload } from '../events'
+import { getState } from '../state'
 import { PredictService } from '../services'
 
 export default class extends Controller {
@@ -12,8 +12,13 @@ export default class extends Controller {
   declare readonly hasSubscriberTarget: boolean
   declare readonly subscriberTargets: Element[]
 
-  setupClient({ detail: { token } }: EventDetail<TokenChangedPayload>) {
-    const replicate = new Replicate({ token })
+  setupClient() {
+    const state = getState()
+    if(!state.hasToken) {
+      return
+    }
+
+    const replicate = new Replicate({ token: state.token })
     replicate.baseUrl = `${window.location.origin}/ai`
 
     this.predictor = new PredictService(replicate, import.meta.env.VITE_MODEL_VERSION)
