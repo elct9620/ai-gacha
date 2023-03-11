@@ -7,7 +7,7 @@ import {
 } from './prompt'
 
 const BASE_PROMPT = [
-  'mksks style',  'masterpiece',  'best quality',  'ultra-detailed',  'illustration', 'portrait',
+  'mksks style',  'masterpiece',  'best quality',  'ultra-detailed',  'illustration', 'portrait', 'looking at viewer',
 ]
 
 const NEGATIVE_PROMPT = [

@@ -75,6 +75,6 @@ export const RacePrompt = {
 }
 
 export const TraitPrompt = [
-  'indoors', 'dimly lit', 'upper body','close-up', 'straight on', 'face focus', 'looking at viewer',
+  'indoors', 'dimly lit', 'upper body','close-up', 'straight on', 'face focus',
   'serene expression', 'chains', 'beam', 'energy' , 'chaos', 'throne room'
 ]
