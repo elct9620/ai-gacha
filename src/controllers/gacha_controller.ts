@@ -1,33 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
-import fetch from 'node-fetch'
 import Replicate from 'replicate-js'
 
 import PredictService from '../domains/predict_service'
-import RenderService from '../domains/render_service'
 
 type TokenChangedPayload = {
   token: string
 }
 
 export default class extends Controller {
-  static targets = ["status", "card"]
+  static targets = ["status", "subscriber"]
 
   private predictor?: PredictService
-  private renderer?: RenderService
 
   declare readonly hasStatusTarget: boolean
   declare readonly statusTarget: HTMLDivElement
-  declare readonly hasCardTarget: boolean
-  declare readonly cardTarget: HTMLCanvasElement
-
-  connect() {
-    if(this.hasCardTarget) {
-      const ctx = this.cardTarget.getContext('2d')
-      if(ctx) {
-        this.renderer = new RenderService(ctx, this.cardTarget.width, this.cardTarget.height)
-      }
-    }
-  }
+  declare readonly hasSubscriberTarget: boolean
+  declare readonly subscriberTargets: Element[]
 
   setupClient({ detail: { token } }: { detail: TokenChangedPayload }) {
     const replicate = new Replicate({ token })
@@ -41,23 +29,24 @@ export default class extends Controller {
       return
     }
 
-    this.renderer?.clear()
+    this.subscriberTargets.forEach(target => {
+      this.dispatch("start", { target })
+    })
 
-    let prediction
+    let prediction: string | null = null
     for await (prediction of this.predictor.predict()) {
       this.setStatus('生成中⋯⋯')
     }
 
-    const renderable = this.hasCardTarget && prediction
-    if (!renderable) {
+    if (!prediction) {
       this.setStatus('失敗')
       return
     }
 
-    const imageBlob =  await fetch(prediction).then(res => res.blob())
-    const image = await createImageBitmap(imageBlob)
+    this.subscriberTargets.forEach(target => {
+      this.dispatch("success", { target, detail: { url: prediction }})
+    })
 
-    this.renderer?.draw(image)
     this.setStatus('完成')
     this.hideStatus()
   }
