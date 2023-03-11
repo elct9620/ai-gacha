@@ -3,6 +3,7 @@ import {
   Race,
   HairLength,
   HairColor,
+  EyeColor,
 } from './entities'
 
 type Schema = {
@@ -10,6 +11,8 @@ type Schema = {
   race?: Race,
   hairLength?: HairLength,
   hairColor?: HairColor,
+  eyeColor?: EyeColor
+  hires?: boolean
 }
 
 let store: Schema = {}
@@ -28,6 +31,8 @@ export class State {
       race: store.race,
       hairLength: store.hairLength,
       hairColor: store.hairColor,
+      eyeColor: store.eyeColor,
+      hires: store.hires,
     })
   }
 
@@ -45,6 +50,14 @@ export class State {
 
   setHairColor(hairColor: HairColor) {
     store.hairColor = hairColor
+  }
+
+  setEyeColor(eyeColor: EyeColor) {
+    store.eyeColor = eyeColor
+  }
+
+  setHires(hires: boolean) {
+    store.hires = hires
   }
 }
 

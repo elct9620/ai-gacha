@@ -15,17 +15,26 @@
         <canvas class="bg-zinc-900" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:success->card#draw" width="448" height="640" data-testid="card"></canvas>
         <div class="absolute top-1/2 left-0 right-0 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
-      <aside class="space-y-6">
-        <section class="space-y-2">
-          <h1>種族</h1><div class="space-x-2" data-config-target="attribute" data-config-type="race"></div>
-        </section>
-        <section class="space-y-2">
-          <h1>髮型</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairLength"></div>
-        </section>
-        <section class="space-y-2">
-          <h1>髮色</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairColor"></div>
-        </section>
-        <hr class="border-t border-red-900" />
+      <aside>
+        <h1 class="mb-2 text-xl">概率</h1>
+        <div class="space-y-6">
+          <section class="space-y-2">
+            <h1>種族</h1><div class="space-x-2" data-config-target="attribute" data-config-type="race"></div>
+          </section>
+          <section class="space-y-2">
+            <h1>髮型</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairLength"></div>
+          </section>
+          <section class="space-y-2">
+            <h1>髮色</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hairColor"></div>
+          </section>
+          <section class="space-y-2">
+            <h1>瞳色</h1><div class="space-x-2" data-config-target="attribute" data-config-type="eyeColor"></div>
+          </section>
+          <section class="space-y-2">
+            <h1>細化</h1><div class="space-x-2" data-config-target="attribute" data-config-type="hires"></div>
+          </section>
+        </div>
+        <hr class="my-8 border-t border-red-900" />
         <section class="flex">
           <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" />
           <button class="btn btn-primary border-l-0" data-action="click->gacha#draw">製作</button>

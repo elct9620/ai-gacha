@@ -23,7 +23,8 @@ export type CardAttribute = {
   hairLength?: HairLength
   hairColor?: HairColor
   eyeColor?: EyeColor
-  race?: Race
+  race?: Race,
+  hires?: boolean
 }
 
 export class Card {
@@ -36,12 +37,15 @@ export class Card {
   public eyeColor: EyeColor
   public race: Race
 
+  private _hires: boolean
+
   constructor(attributes?: CardAttribute) {
     this.gender = attributes?.gender || Gender.Female
     this.hairLength = attributes?.hairLength || HairLength.Long
     this.hairColor = attributes?.hairColor || HairColor.White
     this.eyeColor = attributes?.eyeColor || EyeColor.Golden
     this.race = attributes?.race || Race.Angel
+    this._hires = attributes?.hires || false
   }
 
   toPrompt(): string {
@@ -60,6 +64,6 @@ export class Card {
   }
 
   get isHires() {
-    return false
+    return this._hires
   }
 }

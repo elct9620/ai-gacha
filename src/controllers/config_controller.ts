@@ -4,10 +4,11 @@ import {
   Race,
   HairLength,
   HairColor,
+  EyeColor,
 } from '../entities'
 import { getState, State } from '../state'
 
-type AttributeNames = "race" | "hairLength" | "hairColor"
+type AttributeNames = "race" | "hairLength" | "hairColor" | "eyeColor" | "hires"
 type AttributeItem = Record<number, string>
 const AttributeOptions: Record<AttributeNames, AttributeItem> = {
   "race": {
@@ -32,7 +33,17 @@ const AttributeOptions: Record<AttributeNames, AttributeItem> = {
     [HairColor.Purple]: '紫',
     [HairColor.Golden]: '金',
     [HairColor.Brown]: '棕'
-  }
+  },
+  "eyeColor": {
+    [EyeColor.Golden]:  '金',
+    [EyeColor.Blue]: '藍',
+    [EyeColor.Green]: '綠',
+    [EyeColor.Red]: '紅'
+  },
+  "hires": {
+    0: '否',
+    1: '是',
+  },
 }
 
 type Setter = (state: State, value: number) => void
@@ -40,6 +51,8 @@ const AttributeSetters: Record<AttributeNames, Setter> = {
   "race": (state: State, value: number) => { state.setRace(value as Race) },
   "hairLength": (state: State, value: number) => { state.setHairLength(value as HairLength) },
   "hairColor": (state: State, value: number) => { state.setHairColor(value as HairColor) },
+  "eyeColor": (state: State, value: number) => { state.setEyeColor(value as EyeColor) },
+  "hires": (state: State, value: number) => { state.setHires(value == 1) },
 }
 
 const createInput = (type: string, id: string) => {
