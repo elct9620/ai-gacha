@@ -5,9 +5,9 @@ import { chromium } from 'playwright'
 import type { Browser, Page } from 'playwright'
 import { expect } from '@playwright/test'
 
-import { resetState } from '../state'
+import { resetState } from '../../src/state'
 
-describe('GachaController', async () => {
+describe('Gacha', async () => {
   let server: PreviewServer
   let browser: Browser
   let page: Page
