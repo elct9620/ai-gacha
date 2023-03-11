@@ -37,6 +37,9 @@ export default class extends Controller {
       return
     }
 
+    const ctx = this.cardTarget.getContext('2d')
+    ctx?.clearRect(0, 0, this.cardTarget.width, this.cardTarget.height)
+
     let prediction
     for await (prediction of this.model.generate()) {
       this.setStatus('生成中⋯⋯')
@@ -50,10 +53,10 @@ export default class extends Controller {
 
     const imageBlob =  await fetch(prediction).then(res => res.blob())
     const image = await createImageBitmap(imageBlob)
-    const ctx = this.cardTarget.getContext('2d')
 
     ctx?.drawImage(image, 0, 0)
     this.setStatus('完成')
+    this.hideStatus()
   }
 
   private setStatus(content: string) {
@@ -61,6 +64,16 @@ export default class extends Controller {
       return
     }
 
+    this.statusTarget.classList.remove('hidden')
+    this.statusTarget.classList.add('animate-pulse')
     this.statusTarget.innerText = content
+  }
+
+  private hideStatus() {
+    if(!this.hasStatusTarget) {
+      return
+    }
+
+    this.statusTarget.classList.add('hidden')
   }
 }

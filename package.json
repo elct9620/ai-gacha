@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "build && vitest --ui",
-    "coverage": "build && vitest run --coverage"
+    "test": "npm run build && vitest --ui",
+    "coverage": "npm run build && vitest run --coverage"
   },
   "devDependencies": {
     "@edge-runtime/vm": "^2.1.2",

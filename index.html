@@ -8,8 +8,10 @@
   <body class="bg-zinc-900">
     <div id="app" class="flex flex-col items-center container mx-auto px-4 my-16 space-y-8" data-controller="gacha">
       <div class="relative">
-        <div class="absolute top-0 inset-x-0 concern concern-top"></div>
-        <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
+        <div class="absolute inset-x-0 inset-y-0 animate-expand">
+          <div class="absolute top-0 inset-x-0 concern concern-top"></div>
+          <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
+        </div>
         <canvas class="bg-zinc-900" data-gacha-target="card" width="448" height="640" data-testid="card"></canvas>
         <div class="absolute top-1/2 left-0 right-0 text-center text-red-700 font-cubic11" data-gacha-target="status" data-testid="status">[CODE::INITIALIZE]</div>
       </div>
