@@ -22,6 +22,11 @@
     @apply ease-in-out-back duration-700;
   }
 
+  .selectable {
+    @apply cursor-pointer;
+    @apply peer-checked:bg-red-700 peer-checked:text-white;
+  }
+
   .btn {
     @apply form-input;
     @apply text-red-700;

@@ -43,10 +43,10 @@ export const HairColorPrompt = {
 }
 
 export enum EyeColor {
-  Golden = 'golden eyes',
-  Blue = 'blue eyes',
-  Green = 'green eyes',
-  Red = 'red eyes'
+  Golden,
+  Blue,
+  Green,
+  Red
 }
 
 export const EyeColorPrompt = {

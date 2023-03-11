@@ -1,16 +1,20 @@
 import {
   Card,
   Race,
+  HairLength,
+  HairColor,
 } from './entities'
 
 type Schema = {
   token?: string
-  race?: Race
+  race?: Race,
+  hairLength?: HairLength,
+  hairColor?: HairColor,
 }
 
 let store: Schema = {}
 
-class State {
+export class State {
   get hasToken(): boolean {
     return store.token != undefined && store.token!.length > 0
   }
@@ -21,7 +25,9 @@ class State {
 
   get currentCard(): Card {
     return new Card({
-      race: store.race
+      race: store.race,
+      hairLength: store.hairLength,
+      hairColor: store.hairColor,
     })
   }
 
@@ -31,6 +37,14 @@ class State {
 
   setRace(race: Race) {
     store.race = race
+  }
+
+  setHairLength(hairLength: HairLength) {
+    store.hairLength = hairLength
+  }
+
+  setHairColor(hairColor: HairColor) {
+    store.hairColor = hairColor
   }
 }
 
