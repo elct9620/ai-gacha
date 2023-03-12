@@ -40,7 +40,8 @@ export default class extends Controller {
       return
     }
 
-   this.disableButton()
+    this.scrollToTop()
+    this.disableButton()
     this.subscriberTargets.forEach(target => {
       this.dispatch("start", { target })
     })
@@ -89,6 +90,10 @@ export default class extends Controller {
     this.subscriberTargets.forEach(target => {
       this.dispatch("share", { target })
     })
+  }
+
+  scrollToTop() {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100)
   }
 
   enableDraw() {
