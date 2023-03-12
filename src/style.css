@@ -4,8 +4,8 @@
 
 @font-face {
   font-family: "Cubic11";
-  src:  url('fonts/Cubic_11.woff2') format('woff2'),
-        url('fonts/Cubic_11.woff') format('woff');
+  src:  url('./assets/fonts/Cubic_11.woff2') format('woff2'),
+        url('./assets/fonts/Cubic_11.woff') format('woff');
 }
 
 @layer components {
