@@ -5,8 +5,6 @@ import { chromium } from 'playwright'
 import type { Browser, Page } from 'playwright'
 import { expect } from '@playwright/test'
 
-import { resetState } from '../../src/state'
-
 describe('Gacha', async () => {
   let server: PreviewServer
   let browser: Browser
@@ -19,7 +17,6 @@ describe('Gacha', async () => {
   })
 
   afterAll(async () => {
-    resetState()
     await browser.close()
     await new Promise<void>((resolve, reject) => {
       server.httpServer.close(error => error ? reject(error) : resolve())
