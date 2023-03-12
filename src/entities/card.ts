@@ -31,8 +31,8 @@ export type CardAttribute = {
 }
 
 export class Card {
-  static readonly WIDTH = 448
-  static readonly HEIGHT = 640
+  static readonly WIDTH = 320
+  static readonly HEIGHT = 576
 
   public gender: Gender
   public hairLength: HairLength

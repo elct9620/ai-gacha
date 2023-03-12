@@ -5,6 +5,8 @@ import { EventDetail, PredictionPayload } from '../events'
 import { RenderService } from '../services'
 import { getState } from '../state'
 
+import cardFrameURL from '../assets/frame.png'
+
 export default class extends Controller<HTMLCanvasElement> {
   private renderer?: RenderService
 
@@ -29,7 +31,12 @@ export default class extends Controller<HTMLCanvasElement> {
       .then(res => res.blob())
       .then(blob => createImageBitmap(blob))
 
+    const frame = await fetch(cardFrameURL)
+      .then(res => res.blob())
+      .then(blob => createImageBitmap(blob))
+
     this.renderer.draw(image)
+    this.renderer.draw(frame)
   }
 
   download() {
