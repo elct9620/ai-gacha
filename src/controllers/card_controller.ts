@@ -52,6 +52,7 @@ export default class extends Controller<HTMLCanvasElement> {
     const state = getState()
     const image = await fetch(this.element.toDataURL()).then(res => res.blob())
     await navigator.share({
+      title: 'AI Gacha',
       url: 'https://ai-gacha.aotoki.dev',
       files: [
         new File(
