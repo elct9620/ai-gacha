@@ -76,5 +76,6 @@ export const RacePrompt = {
 
 export const TraitPrompt = [
   'indoors', 'dimly lit', 'upper body','close-up', 'straight on', 'face focus',
-  'serene expression', 'chains', 'beam', 'energy' , 'chaos', 'throne room', 'fantasy'
+  'serene expression', 'chains', 'beam', 'energy' , 'chaos', 'throne room', 'fantasy',
+  'sword', 'wizard', 'priest', 'hero', 'gem', 'crystal'
 ]
