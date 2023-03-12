@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "preview:pages": "npm run build && npx wrangler pages dev dist",
     "test": "npm run build && vitest --ui",
     "coverage": "npm run build && vitest run --coverage"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230307.0",
     "@edge-runtime/vm": "^2.1.2",
     "@playwright/test": "^1.31.2",
     "@vitest/coverage-c8": "^0.29.2",
@@ -21,7 +23,8 @@
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
-    "vitest": "^0.29.2"
+    "vitest": "^0.29.2",
+    "wrangler": "^2.12.2"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",

@@ -44,12 +44,18 @@ export default class extends Controller {
     state.useTraits(trait.shuffle())
 
     let prediction: PredictState = new PredictState(false)
-    for await (prediction of this.predictor.predict(state.currentCard)) {
-      if(prediction.hasOutput) {
-        this.subscriberTargets.forEach(target => {
-          this.dispatch("processing", { target, detail: { url: prediction.outputURL } })
-        })
+    try {
+      for await (prediction of this.predictor.predict(state.currentCard)) {
+        if(prediction.hasOutput) {
+          this.subscriberTargets.forEach(target => {
+            this.dispatch("processing", { target, detail: { url: prediction.outputURL } })
+          })
+        }
       }
+    } catch(e) {
+      this.subscriberTargets.forEach(target => {
+        this.dispatch("failed", { target })
+      })
     }
     this.enableButton()
 
