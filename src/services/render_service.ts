@@ -10,7 +10,7 @@ export class RenderService {
     this.height = height
   }
 
-  draw(image: ImageBitmap) {
+  draw(image: ImageBitmap | HTMLCanvasElement) {
     this.ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, this.width, this.height)
   }
 

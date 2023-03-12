@@ -1,5 +1,6 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller, Context } from "@hotwired/stimulus"
 import fetch from 'node-fetch'
+import pica from 'pica'
 
 import { EventDetail, PredictionPayload } from '../events'
 import { RenderService } from '../services'
@@ -9,6 +10,13 @@ import cardFrameURL from '../assets/frame.png'
 
 export default class extends Controller<HTMLCanvasElement> {
   private renderer?: RenderService
+  private pica: pica.Pica
+
+  constructor(context: Context) {
+    super(context)
+
+    this.pica = pica()
+  }
 
   connect() {
     const ctx = this.element.getContext('2d')
@@ -27,15 +35,22 @@ export default class extends Controller<HTMLCanvasElement> {
       return
     }
 
+    const resizeTarget = document.createElement('canvas')
+    resizeTarget.width = this.element.width
+    resizeTarget.height = this.element.height
+
     const image =  await fetch(url)
       .then(res => res.blob())
       .then(blob => createImageBitmap(blob))
+      .then(image => this.pica.resize(image, resizeTarget))
+
+    this.renderer.draw(image)
 
     const frame = await fetch(cardFrameURL)
       .then(res => res.blob())
       .then(blob => createImageBitmap(blob))
+      .then(image => this.pica.resize(image, resizeTarget))
 
-    this.renderer.draw(image)
     this.renderer.draw(frame)
   }
 
