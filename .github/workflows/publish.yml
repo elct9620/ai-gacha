@@ -7,6 +7,10 @@ on:
 env:
   VITE_MODEL_VERSION: ${{ vars.VITE_MODEL_VERSION }}
 
+concurrency:
+  group: "publish"
+  cancel-in-progress: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
