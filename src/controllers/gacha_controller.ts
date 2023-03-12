@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import Replicate from 'replicate-js'
 
 import { getState } from '../state'
-import { PredictService } from '../services'
+import { PredictService, TraitService } from '../services'
 import { PredictState } from '../entities'
 
 export default class extends Controller {
@@ -38,8 +38,10 @@ export default class extends Controller {
       this.dispatch("start", { target })
     })
 
+    const trait = new TraitService()
     const state = getState()
     state.useSeed(Math.floor(10**16 * Math.random()))
+    state.useTraits(trait.shuffle())
 
     let prediction: PredictState = new PredictState(false)
     for await (prediction of this.predictor.predict(state.currentCard)) {

@@ -4,6 +4,7 @@ import {
   HairColor, HairColorPrompt,
   EyeColor, EyeColorPrompt,
   Race, RacePrompt,
+  TraitPrompt,
 } from './prompt'
 
 const BASE_PROMPT = [
@@ -25,6 +26,7 @@ export type CardAttribute = {
   eyeColor?: EyeColor
   race?: Race,
   hires?: boolean,
+  traits: number[],
   seed: number
 }
 
@@ -37,6 +39,7 @@ export class Card {
   public hairColor: HairColor
   public eyeColor: EyeColor
   public race: Race
+  public traits: number[]
   public seed: number
 
   private _hires: boolean
@@ -47,6 +50,7 @@ export class Card {
     this.hairColor = attributes?.hairColor || HairColor.White
     this.eyeColor = attributes?.eyeColor || EyeColor.Golden
     this.race = attributes?.race || Race.Angel
+    this.traits = attributes?.traits || []
     this.seed = attributes?.seed || 0
     this._hires = attributes?.hires || false
   }
@@ -59,6 +63,7 @@ export class Card {
       ...HairColorPrompt[this.hairColor],
       ...EyeColorPrompt[this.eyeColor],
       ...RacePrompt[this.race],
+      ...this.traits.map(idx => TraitPrompt[idx]).filter(trait => trait)
     ].join(', ')
   }
 

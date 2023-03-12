@@ -13,10 +13,11 @@ type Schema = {
   hairColor?: HairColor,
   eyeColor?: EyeColor
   hires?: boolean,
+  traits: number[],
   seed: number
 }
 
-let store: Schema = { seed: 0 }
+let store: Schema = { seed: 0, traits: [] }
 
 export class State {
   get hasToken(): boolean {
@@ -34,6 +35,7 @@ export class State {
       hairColor: store.hairColor,
       eyeColor: store.eyeColor,
       hires: store.hires,
+      traits: store.traits,
       seed: store.seed,
     })
   }
@@ -44,6 +46,10 @@ export class State {
 
   useSeed(seed: number) {
     store.seed = seed
+  }
+
+  useTraits(traits: number[]) {
+    store.traits = traits
   }
 
   setRace(race: Race) {
@@ -68,7 +74,7 @@ export class State {
 }
 
 export function resetState() {
-  store = { seed: 0 }
+  store = { seed: 0, traits: [] }
 }
 
 export function getState() {
