@@ -6,7 +6,7 @@
     <title>AI Gacha</title>
   </head>
   <body class="text-red-700 bg-zinc-900 font-cubic11">
-    <main id="app" class="flex flex-col md:flex-row justify-center items-center container mx-auto px-4 my-16 space-y-8 md:space-x-8" data-controller="gacha config" data-action="config:tokenChanged->gacha#setupClient">
+    <main id="app" class="flex flex-col md:flex-row justify-center items-center container mx-auto px-4 my-6 space-y-8 md:space-x-8" data-controller="gacha config" data-action="config:tokenChanged->gacha#setupClient">
       <div class="relative">
         <div class="absolute inset-x-0 inset-y-0 animate-expand">
           <div class="absolute top-0 inset-x-0 concern concern-top"></div>
@@ -44,6 +44,10 @@
         <p class="mt-2 text-sm text-red-800">Pastel Mix 模型預設非商業使用，請使用 <a href="https://replicate.com/account" target="_blank" class="text-red-500 cursor-pointer">Replicate</a> 的 API Token 來運行，會被收取少量的運算費用。</p>
       </aside>
     </main>
+    <footer class="container mx-auto p-2 pb-6 text-center space-y-2">
+      <div>原始碼位於 <a href="https://github.com/elct9620/ai-gacha" target="_blank" class="text-red-500">GitHub</a>，如果喜歡這個專案可以透過<a href="https://portaly.cc/aotoki/support" target="_blank" class="text-red-500">贊助</a>支持我</div>
+      <div>Powered by <a href="https://blog.aotoki.me" target="_blank" title="蒼時弦也"><img src="https://blog.aotoki.me/images/logo.svg" width="100" height="15" class="inline-block ml-2" alt="蒼時弦也" /></a></div>
+    </footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
