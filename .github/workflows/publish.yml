@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  VITE_MODEL_VERSION: ${{ vars.VITE_MODEL_VERSION }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
