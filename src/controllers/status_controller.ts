@@ -4,12 +4,12 @@ export default class extends Controller<HTMLDivElement> {
   start() {
     this.show()
     this.pluse()
-    this.element.innerText = '生成中⋯⋯'
+    this.element.innerText = '根據雲端伺服器的狀態會在幾秒到幾分鐘內生成結果。'
   }
 
   failed() {
     this.stopPluse()
-    this.element.innerText = '失敗'
+    this.element.innerText = '產生的內容有無法顯示的部分，請重新嘗試。'
   }
 
   success() {
