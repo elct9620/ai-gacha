@@ -20,7 +20,7 @@
           <div class="absolute top-0 inset-x-0 concern concern-top"></div>
           <div class="absolute bottom-0 inset-x-0 concern concern-bottom"></div>
         </div>
-        <canvas class="bg-zinc-900 max-w-full" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:processing->card#draw gacha:success->card#draw gacha:download->card#download" width="320" height="576" data-testid="card"></canvas>
+        <canvas class="bg-zinc-900 max-w-full" data-controller="card" data-gacha-target="subscriber" data-action="gacha:start->card#clear gacha:processing->card#draw gacha:success->card#draw gacha:download->card#download gacha:share->card#share" width="320" height="576" data-testid="card"></canvas>
         <div class="absolute top-1/2 left-0 right-0 px-5 py-4 bg-zinc-900 text-center text-red-700" data-controller="status" data-gacha-target="subscriber" data-action="gacha:start->status#start gacha:success->status#success gacha:failed->status#failed" data-testid="status">[AIGACHA::V1.0]</div>
       </div>
       <aside>
@@ -48,6 +48,7 @@
           <input class="input" type="password" placeholder="Replicate API Token" data-config-target="token" data-action="config#setToken" data-testid="token" />
           <button class="btn btn-primary border-t-0 md:border-t md:border-l-0" data-gacha-target="drawButton" data-action="click->gacha#draw" disabled>製作</button>
           <button class="btn btn-primary border-t-0 md:border-t md:border-l-0" data-gacha-target="downloadButton" data-action="click->gacha#download" disabled>下載</button>
+          <button class="btn btn-primary border-t-0 md:border-t md:border-l-0" data-gacha-target="shareButton" data-action="click->gacha#share" disabled>分享</button>
         </section>
         <p class="mt-2 text-sm text-red-800">Pastel Mix 模型預設非商業使用，請使用 <a href="https://replicate.com/account" target="_blank" class="text-red-500 cursor-pointer">Replicate</a> 的 API Token 來運行，會被收取少量的運算費用。</p>
       </aside>

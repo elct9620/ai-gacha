@@ -6,7 +6,7 @@ import { PredictService, TraitService } from '../services'
 import { PredictState } from '../entities'
 
 export default class extends Controller {
-  static targets = ["subscriber", "drawButton", "downloadButton"]
+  static targets = ["subscriber", "drawButton", "downloadButton", "shareButton"]
 
   private predictor?: PredictService
 
@@ -14,6 +14,13 @@ export default class extends Controller {
   declare readonly subscriberTargets: Element[]
   declare readonly drawButtonTarget: HTMLButtonElement
   declare readonly downloadButtonTarget: HTMLButtonElement
+  declare readonly shareButtonTarget: HTMLButtonElement
+
+  connect() {
+    if(!navigator.canShare) {
+      this.shareButtonTarget.classList.add('hidden')
+    }
+  }
 
   setupClient() {
     const state = getState()
@@ -78,6 +85,12 @@ export default class extends Controller {
     })
   }
 
+  share() {
+    this.subscriberTargets.forEach(target => {
+      this.dispatch("share", { target })
+    })
+  }
+
   enableDraw() {
     this.drawButtonTarget.disabled = false
   }
@@ -86,9 +99,14 @@ export default class extends Controller {
     this.downloadButtonTarget.disabled = false
   }
 
+  enableShare() {
+    this.shareButtonTarget.disabled = false
+  }
+
   enableButton() {
     this.enableDraw()
     this.enableDownload()
+    this.enableShare()
   }
 
   disableDraw() {
@@ -99,8 +117,13 @@ export default class extends Controller {
     this.downloadButtonTarget.disabled = true
   }
 
+  disableShare() {
+    this.shareButtonTarget.disabled = true
+  }
+
   disableButton() {
     this.disableDraw()
     this.disableDownload()
+    this.disableShare()
   }
 }

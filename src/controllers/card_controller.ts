@@ -47,4 +47,19 @@ export default class extends Controller<HTMLCanvasElement> {
     tempElement.click()
     tempElement.remove()
   }
+
+  async share() {
+    const state = getState()
+    const image = await fetch(this.element.toDataURL()).then(res => res.blob())
+    await navigator.share({
+      url: 'https://ai-gacha.aotoki.dev',
+      files: [
+        new File(
+          [image],
+          `${state.currentCard.seed}.png`,
+          { type: "image/png" }
+        )
+      ]
+    })
+  }
 }
