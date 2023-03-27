@@ -74,6 +74,22 @@ export const RacePrompt = {
   [Race.Human]: ['human']
 }
 
+/**
+ * Can convert to configurable options
+ * Reference: https://blogcake.net/hair-style/
+ */
+export const HairStylePrompt = [
+  '',
+  'bob hair', 'pixie hair', 'lob hair', 'shag hair', 'mohawk hair', 'buzz cut hair', 'crew cut hair',
+  'french braid hair', 'dutch braid hair', 'fishtail braid hair', 'top knot hair', 'ponytail hair',
+  'chignon hair', 'afro hair', 'perm hair', 'cornrows hair', 'dreadlocks hair', 'undercut hair',
+  'slicked back hair', 'side part hair', 'beach waves hair', 'bowl cut hair', 'flipped ends hair',
+  'layered cut hair', 'taper cut hair', 'updo hair', 'braided crown hair', 'side-swept bangs hair',
+  'feathered hair hair', 'long layers hair', 'finger waves hair', 'pin curls hair', 'twisted updo hair',
+  '360 waves hair', 'high top fade hair', 'comb over hair', 'space buns hair',
+  'bob with bangs hair', 'curtain bangs hair', 'wavy bob hair', 'side undercut hair'
+]
+
 export const TraitPrompt = [
   'indoors', 'dimly lit', 'upper body','close-up', 'straight on', 'face focus',
   'serene expression', 'chains', 'beam', 'energy' , 'chaos', 'throne room', 'fantasy',

@@ -4,6 +4,7 @@ import {
   HairColor, HairColorPrompt,
   EyeColor, EyeColorPrompt,
   Race, RacePrompt,
+  HairStylePrompt,
   TraitPrompt,
 } from './prompt'
 
@@ -23,6 +24,7 @@ export type CardAttribute = {
   gender?: Gender
   hairLength?: HairLength
   hairColor?: HairColor
+  hairStyle?: number,
   eyeColor?: EyeColor
   race?: Race,
   hires?: boolean,
@@ -37,6 +39,7 @@ export class Card {
   public gender: Gender
   public hairLength: HairLength
   public hairColor: HairColor
+  public hairStyle: number
   public eyeColor: EyeColor
   public race: Race
   public traits: number[]
@@ -48,6 +51,7 @@ export class Card {
     this.gender = attributes?.gender || Gender.Female
     this.hairLength = attributes?.hairLength || HairLength.Long
     this.hairColor = attributes?.hairColor || HairColor.White
+    this.hairStyle = attributes?.hairStyle || 0
     this.eyeColor = attributes?.eyeColor || EyeColor.Golden
     this.race = attributes?.race || Race.Angel
     this.traits = attributes?.traits || []
@@ -61,10 +65,11 @@ export class Card {
       ...GenderPrompt[this.gender],
       ...HairLengthPrompt[this.hairLength],
       ...HairColorPrompt[this.hairColor],
+      ...[HairStylePrompt[this.hairStyle]],
       ...EyeColorPrompt[this.eyeColor],
       ...RacePrompt[this.race],
       ...this.traits.map(idx => TraitPrompt[idx]).filter(trait => trait)
-    ].join(', ')
+    ].filter(p => p.length > 0 ).join(', ')
   }
 
   toNegativePrompt(): string {

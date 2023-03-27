@@ -1,8 +1,6 @@
-import { TraitPrompt } from '../entities'
-
 export class TraitService {
-  shuffle(amount: number = 2): number[] {
-    const size = TraitPrompt.length
+  shuffle(prompts: string[], amount: number = 2): number[] {
+    const size = prompts.length
     const traits: number[] = []
 
     while(amount > traits.length) {

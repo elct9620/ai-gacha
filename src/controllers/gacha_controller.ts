@@ -3,7 +3,11 @@ import Replicate from 'replicate-js'
 
 import { getState } from '../state'
 import { PredictService, TraitService } from '../services'
-import { PredictState } from '../entities'
+import {
+  PredictState,
+  TraitPrompt,
+  HairStylePrompt,
+} from '../entities'
 
 export default class extends Controller {
   static targets = ["subscriber", "drawButton", "downloadButton", "shareButton"]
@@ -49,7 +53,8 @@ export default class extends Controller {
     const trait = new TraitService()
     const state = getState()
     state.useSeed(Math.floor(10**16 * Math.random()))
-    state.useTraits(trait.shuffle())
+    state.useTraits(trait.shuffle(TraitPrompt))
+    state.useHairStyle(trait.shuffle(HairStylePrompt))
 
     let prediction: PredictState = new PredictState(false)
     try {

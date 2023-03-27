@@ -11,6 +11,7 @@ type Schema = {
   race?: Race,
   hairLength?: HairLength,
   hairColor?: HairColor,
+  hairStyle?: number,
   eyeColor?: EyeColor
   hires?: boolean,
   traits: number[],
@@ -33,6 +34,7 @@ export class State {
       race: store.race,
       hairLength: store.hairLength,
       hairColor: store.hairColor,
+      hairStyle: store.hairStyle,
       eyeColor: store.eyeColor,
       hires: store.hires,
       traits: store.traits,
@@ -50,6 +52,10 @@ export class State {
 
   useTraits(traits: number[]) {
     store.traits = traits
+  }
+
+  useHairStyle(styles: number[]) {
+    store.hairStyle = styles[0] || 0
   }
 
   setRace(race: Race) {
